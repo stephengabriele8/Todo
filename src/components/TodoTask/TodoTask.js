@@ -62,7 +62,9 @@ export const TodoTask = (props) => {
             }
             label={
               <div className={classes.taskSummary}>
-                <Typography className={checked && classes.displayTaskChecked}>
+                <Typography
+                  className={checked ? classes.displayTaskChecked : ""}
+                >
                   {name}
                 </Typography>
                 <Typography className={classes.calendarButton}>

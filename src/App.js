@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.scss";
 import TodoGroup from "./components/TodoGroup/TodoGroup";
-import NewTodoTask from "./components/TodoTask/NewTodoTask";
-import Fab from "@material-ui/core/Fab";
-import AddIcon from "@material-ui/icons/Add";
-import AddTaskModal from "./components/AddTaskModal/AddTaskModal";
 import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,22 +20,19 @@ const useStyles = makeStyles((theme) => ({
 
 export const App = () => {
   const classes = useStyles();
-  const [showModal, setShowModal] = useState(false);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const result = await axios.get("http://localhost:3001/tasks");
+  //     setTaskData([]);
+  //   };
+  //   fetchData();
+  // }, []);
 
   return (
     <div className="App">
       <header className="App__header">Todo</header>
       <TodoGroup />
-      <div className={classes.add}>
-        <NewTodoTask />
-        <Fab
-          color="primary"
-          aria-label="add"
-          onClick={() => setShowModal(true)}
-        >
-          <AddIcon onClick={() => setShowModal(true)} />
-        </Fab>
-      </div>
     </div>
   );
 };

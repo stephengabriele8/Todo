@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./TodoGroup.scss";
 import { makeStyles } from "@material-ui/core/styles";
-import { allTasks } from "./../../taskDetails";
+import { connect } from "react-redux";
 import TodoTask from "../TodoTask/TodoTask";
+import NewTodoTask from "../TodoTask/NewTodoTask";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,21 +20,40 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const TodoGroup = (props) => {
-  const { category } = props;
+  const { tasks } = props;
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      {allTasks.map((category) => (
-        <div className={`${classes.root} TodoGroup`}>
-          <div className="TodoGroup__category">{category.category}</div>
-          {category.tasks.map((task) => (
-            <TodoTask task={task} />
-          ))}
-        </div>
-      ))}
+      <div className={`${classes.root} TodoGroup`}>
+        <div className="TodoGroup__category">Past</div>
+        {tasks.past.map((task) => (
+          <TodoTask task={task} />
+        ))}
+        <div className="TodoGroup__category">Today</div>
+        {tasks.today.map((task) => (
+          <TodoTask task={task} />
+        ))}
+        <div className="TodoGroup__category">Tomorrow</div>
+        {tasks.tomorrow.map((task) => (
+          <TodoTask task={task} />
+        ))}
+        <div className="TodoGroup__category">Future</div>
+        {tasks.future.map((task) => (
+          <TodoTask task={task} />
+        ))}
+      </div>
+      <div className={classes.add}>
+        <NewTodoTask />
+      </div>
     </div>
   );
 };
 
-export default TodoGroup;
+const mapStateToProps = (state) => {
+  const { tasks } = state;
+  return { tasks };
+};
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoGroup);

@@ -1,0 +1,4 @@
+export const ADD_PAST_TASK = "ADD_PAST_TASK";
+export const ADD_TODAY_TASK = "ADD_TODAY_TASK";
+export const ADD_TOMORROW_TASK = "ADD_TOMORROW_TASK";
+export const ADD_FUTURE_TASK = "ADD_FUTURE_TASK";
